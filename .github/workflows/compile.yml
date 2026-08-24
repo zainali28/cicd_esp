@@ -1,0 +1,30 @@
+name: compile
+
+run-name: compile stage
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: setup arduino cli
+        uses: arduino/setup-arduino-cli@v2
+
+      - name: configure esp board url
+        uses: |
+          arduino-cli config init --overwrite
+          arduino-cli config set board_manager.additional_urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+
+
+      - name: install esp board
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32
+
+      - name: compile and verify syntax
+        run: |
+          arduino-cli compile --fqbn esp32:esp32:esp32 .
