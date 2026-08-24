@@ -1,0 +1,49 @@
+# Oxeltech ESP32/Arduino firmware clang-tidy config
+#
+# Philosophy: start permissive, tighten over time. Several check families
+# that are excellent for application C++ produce noise on embedded/Arduino
+# code, so they are disabled here. Re-enable them per project as the code
+# is cleaned up.
+#
+# Rollout note: keep `|| true` on the CI step (warn-only) until the backlog
+# of findings is cleared, then remove it to make findings blocking.
+
+Checks: >
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  misc-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-reserved-identifier,
+  -cert-dcl21-cpp,
+  -cert-err58-cpp,
+  -misc-no-recursion,
+  -misc-non-private-member-variables-in-classes,
+  -misc-use-anonymous-namespace,
+  -readability-identifier-length,
+  -readability-magic-numbers,
+  -readability-braces-around-statements,
+  -readability-function-cognitive-complexity,
+  -readability-avoid-const-params-in-decls
+
+# Treat nothing as an error at the tidy level; CI controls pass/fail.
+WarningsAsErrors: ''
+
+# Only analyze project headers, not the toolchain / core headers.
+# Adjust the regex if your source lives in src/ or similar.
+HeaderFilterRegex: '.*\.(h|hpp)$'
+
+FormatStyle: file
+
+CheckOptions:
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.VariableCase
+    value: lower_case
+  - key: readability-identifier-naming.ConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE

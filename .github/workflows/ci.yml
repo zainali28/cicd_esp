@@ -1,0 +1,20 @@
+# This is what each ESP32 project puts at .github/workflows/ci.yml
+# It's the entire CI file for a project — everything else lives centrally.
+#
+# Replace OWNER/ci-templates and the @v1 ref with your real repo and tag.
+
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  firmware:
+    uses: OWNER/ci-templates/.github/workflows/esp32-ci.yml@v1
+    with:
+      # Only list the chips THIS project actually targets.
+      targets: '["esp32s2"]'
+      core_version: '3.3.11'
+      sketch_path: '.'
+      # Flip to true once this project's clang-tidy findings are cleared.
+      enforce_tidy: true
+      run_unit_tests: false

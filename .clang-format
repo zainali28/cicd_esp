@@ -1,0 +1,47 @@
+# Oxeltech ESP32/Arduino firmware style
+# Based on Google style with embedded-friendly adjustments.
+---
+Language: Cpp
+BasedOnStyle: Google
+
+# Indentation
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+
+# Line length: 100 is a practical firmware default (80 is cramped for
+# long peripheral/register names, 120 hides too much on side-by-side diffs).
+ColumnLimit: 100
+
+# Braces
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+
+# Pointers/references: bind to type (uint8_t* buf), common in C firmware.
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+# Includes: keep them sorted but do not reorder across blank-line groups,
+# so hardware headers that must come in a specific order stay put.
+SortIncludes: CaseSensitive
+IncludeBlocks: Preserve
+
+# Spacing
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceAfterCStyleCast: true
+
+# Alignment: helps register/bitfield tables stay readable.
+AlignConsecutiveMacros: AcrossEmptyLines
+AlignTrailingComments: true
+AlignAfterOpenBracket: Align
+
+# Misc
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+ReflowComments: true
