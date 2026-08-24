@@ -19,7 +19,7 @@ jobs:
 
       - name: run static analysis
         run: |
-          cppcheck --enable-all --error-exitcode=1 --inline-suppr --force --quiet .
+          cppcheck --enable=all --error-exitcode=1 --inline-suppr --force --quiet .
 
       - name: setup arduino cli
         uses: arduino/setup-arduino-cli@v2
