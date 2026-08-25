@@ -9,7 +9,7 @@ on: [push, pull_request]
 
 jobs:
   firmware:
-    uses: zainali28/ci-templates/.github/workflows/esp32-ci.yml@v2
+    uses: zainali28/ci-templates/.github/workflows/esp32-ci.yml@v3
     with:
       # Only list the chips THIS project actually targets.
       targets: '["esp32s2"]'
