@@ -7,12 +7,12 @@ void setup() {
 }
 
 void loop() {
-    Serial.println("Hello World");
+ Serial.println("Hello World");
 
-    switch (a) {
-        case 1:
-            Serial.println("1");
-            break;
+   			 switch (a) {
+case 1:
+           		 Serial.println("1");
+           	 break;
     }
 
     delay(100);
